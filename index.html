@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CEGF Conecta</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1646a0;
+            color: white;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .menu-button {
+            display: none;
+            border: none;
+            background: white;
+            color: #1646a0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* PÁGINAS */
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* INÍCIO */
+
+        .hero {
+            background: #dce9ff;
+            text-align: center;
+            padding: 80px 5%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            color: #1646a0;
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        /* BOTÕES */
+
+        .button {
+            display: inline-block;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            margin: 5px;
+            background: #1646a0;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #0e3275;
+        }
+
+        .button.secondary {
+            background: #6c757d;
+        }
+
+        .button.secondary:hover {
+            background: #50555a;
+        }
+
+        .button.success {
+            background: #218838;
+        }
+
+        .button.success:hover {
+            background: #17682a;
+        }
+
+        /* ESTATÍSTICAS */
+
+        .stats {
+            max-width: 1100px;
+            margin: -30px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 0 5%;
+        }
+
+        .stat-card {
+            background: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            color: #1646a0;
+            font-size: 32px;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1646a0;
+            margin-bottom: 35px;
+            font-size: 30px;
+        }
+
+        /* SERVIÇOS */
+
+        .services {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            color: #1646a0;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            margin-bottom: 15px;
+        }
+
+        /* PÁGINAS INTERNAS */
+
+        .internal-page {
+            max-width: 1000px;
+            margin: auto;
+            padding: 50px 5%;
+        }
+
+        .back-button {
+            display: inline-block;
+            border: none;
+            background: #1646a0;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .back-button:hover {
+            background: #0e3275;
+        }
+
+        .page-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .page-card h2 {
+            color: #1646a0;
+            margin-bottom: 15px;
+        }
+
+        .page-card h3 {
+            color: #1646a0;
+            margin-bottom: 10px;
+        }
+
+        /* FORMULÁRIOS */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* REGISTROS */
+
+        .search-area {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-area input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-button {
+            border: 1px solid #1646a0;
+            background: white;
+            color: #1646a0;
+            padding: 9px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: #1646a0;
+            color: white;
+        }
+
+        .record {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #1646a0;
+            border-radius: 7px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .record h3 {
+            color: #1646a0;
+            margin-bottom: 10px;
+        }
+
+        .record p {
+            margin-bottom: 5px;
+        }
+
+        .empty {
+            background: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            color: #666;
+        }
+
+        /* IMPACTO */
+
+        .impact {
+            background: #1646a0;
+            color: white;
+            text-align: center;
+        }
+
+        .impact h2 {
+            color: white;
+        }
+
+        .impact-content {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            background: #102f68;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* MENSAGEM */
+
+        .message {
+            padding: 15px;
+            border-radius: 6px;
+            background: #dce9ff;
+            color: #1646a0;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 850px) {
+
+            .stats,
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: #1646a0;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .stats,
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-container">
+
+        <div
+            class="logo"
+            onclick="mostrarPagina('inicio')">
+
+            CEGF Conecta
+
+        </div>
+
+        <button
+            type="button"
+            class="menu-button"
+            id="menuButton">
+
+            ☰
+
+        </button>
+
+        <nav>
+
+            <ul id="menu">
+
+                <li>
+                    <a onclick="mostrarPagina('inicio')">
+                        Início
+                    </a>
+                </li>
+
+                <li>
+                    <a onclick="mostrarPagina('servicos')">
+                        Serviços
+                    </a>
+                </li>
+
+                <li>
+                    <a onclick="mostrarPagina('registros')">
+                        Registros
+                    </a>
+                </li>
+
+                <li>
+                    <a onclick="mostrarPagina('impacto')">
+                        Impacto
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<main>
+
+    <!-- INÍCIO -->
+
+    <div
+        id="pagina-inicio"
+        class="page active">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <h1>
+                    CEGF Conecta
+                </h1>
+
+                <p>
+                    Conectando pessoas, ideias e soluções
+                    dentro da comunidade escolar.
+                </p>
+
+                <button
+                    type="button"
+                    class="button"
+                    onclick="mostrarPagina('servicos')">
+
+                    Conhecer serviços
+
+                </button>
+
+                <button
+                    type="button"
+                    class="button"
+                    onclick="mostrarPagina('problemas')">
+
+                    Registrar problema
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <h3 id="totalProblemas">
+                        0
+                    </h3>
+
+                    <p>
+                        Problemas
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3 id="totalObjetos">
+                        0
+                    </h3>
+
+                    <p>
+                        Objetos
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3 id="totalTalentos">
+                        0
+                    </h3>
+
+                    <p>
+                        Talentos
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3 id="totalDoacoes">
+                        0
+                    </h3>
+
+                    <p>
+                        Doações
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2 class="section-title">
+                Como o CEGF Conecta ajuda?
+            </h2>
+
+            <div class="services">
+
+                <div class="service-card">
+
+                    <h3>
+                        Problemas
+                    </h3>
+
+                    <p>
+                        Informe problemas encontrados
+                        na escola.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('problemas')">
+
+                        Acessar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Achados e Perdidos
+                    </h3>
+
+                    <p>
+                        Ajude a encontrar objetos
+                        perdidos.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('objetos')">
+
+                        Acessar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Banco de Talentos
+                    </h3>
+
+                    <p>
+                        Mostre seus talentos
+                        e habilidades.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('talentos')">
+
+                        Acessar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Doações
+                    </h3>
+
+                    <p>
+                        Ofereça ou solicite
+                        materiais.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('doacoes')">
+
+                        Acessar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- SERVIÇOS -->
+
+    <div
+        id="pagina-servicos"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <h2 class="section-title">
+                Serviços
+            </h2>
+
+            <div class="services">
+
+                <div class="service-card">
+
+                    <h3>
+                        Problemas
+                    </h3>
+
+                    <p>
+                        Registre problemas da escola.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('problemas')">
+
+                        Entrar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Achados e Perdidos
+                    </h3>
+
+                    <p>
+                        Registre objetos perdidos
+                        ou encontrados.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('objetos')">
+
+                        Entrar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Banco de Talentos
+                    </h3>
+
+                    <p>
+                        Cadastre suas habilidades.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('talentos')">
+
+                        Entrar
+
+                    </button>
+
+                </div>
+
+                <div class="service-card">
+
+                    <h3>
+                        Doações
+                    </h3>
+
+                    <p>
+                        Registre materiais para doação.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button"
+                        onclick="mostrarPagina('doacoes')">
+
+                        Entrar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PROBLEMAS -->
+
+    <div
+        id="pagina-problemas"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <div class="page-card">
+
+                <h2>
+                    Registrar problema
+                </h2>
+
+                <p>
+                    Informe um problema que precisa
+                    de atenção na escola.
+                </p>
+
+                <br>
+
+                <div
+                    id="mensagemProblema"
+                    class="message">
+
+                </div>
+
+                <form id="formProblema">
+
+                    <div class="form-group">
+
+                        <label for="problemaTitulo">
+                            Título
+                        </label>
+
+                        <input
+                            id="problemaTitulo"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="problemaDescricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="problemaDescricao"
+                            required>
+                        </textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="problemaLocal">
+                            Local
+                        </label>
+
+                        <input
+                            id="problemaLocal"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="problemaNome">
+                            Nome
+                        </label>
+
+                        <input
+                            id="problemaNome"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button">
+
+                        Enviar problema
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="page-card">
+
+                <h2>
+                    Problemas registrados
+                </h2>
+
+                <div id="listaProblemas"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- OBJETOS -->
+
+    <div
+        id="pagina-objetos"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <div class="page-card">
+
+                <h2>
+                    Achados e Perdidos
+                </h2>
+
+                <p>
+                    Registre um objeto perdido ou encontrado.
+                </p>
+
+                <br>
+
+                <form id="formObjeto">
+
+                    <div class="form-group">
+
+                        <label for="objetoTitulo">
+                            Nome do objeto
+                        </label>
+
+                        <input
+                            id="objetoTitulo"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="objetoDescricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="objetoDescricao"
+                            required>
+                        </textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="objetoSituacao">
+                            Situação
+                        </label>
+
+                        <input
+                            id="objetoSituacao"
+                            type="text"
+                            placeholder="Exemplo: perdido ou encontrado"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="objetoLocal">
+                            Local
+                        </label>
+
+                        <input
+                            id="objetoLocal"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="objetoNome">
+                            Nome
+                        </label>
+
+                        <input
+                            id="objetoNome"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button">
+
+                        Registrar objeto
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="page-card">
+
+                <h2>
+                    Objetos registrados
+                </h2>
+
+                <div id="listaObjetos"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TALENTOS -->
+
+    <div
+        id="pagina-talentos"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <div class="page-card">
+
+                <h2>
+                    Banco de Talentos
+                </h2>
+
+                <p>
+                    Compartilhe suas habilidades
+                    com a comunidade escolar.
+                </p>
+
+                <br>
+
+                <form id="formTalento">
+
+                    <div class="form-group">
+
+                        <label for="talentoTitulo">
+                            Talento ou habilidade
+                        </label>
+
+                        <input
+                            id="talentoTitulo"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="talentoDescricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="talentoDescricao"
+                            required>
+                        </textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="talentoNome">
+                            Nome
+                        </label>
+
+                        <input
+                            id="talentoNome"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button">
+
+                        Cadastrar talento
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="page-card">
+
+                <h2>
+                    Talentos cadastrados
+                </h2>
+
+                <div id="listaTalentos"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- DOAÇÕES -->
+
+    <div
+        id="pagina-doacoes"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <div class="page-card">
+
+                <h2>
+                    Doações
+                </h2>
+
+                <p>
+                    Registre materiais que você deseja
+                    oferecer à comunidade.
+                </p>
+
+                <br>
+
+                <form id="formDoacao">
+
+                    <div class="form-group">
+
+                        <label for="doacaoTitulo">
+                            Material
+                        </label>
+
+                        <input
+                            id="doacaoTitulo"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="doacaoDescricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="doacaoDescricao"
+                            required>
+                        </textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="doacaoQuantidade">
+                            Quantidade
+                        </label>
+
+                        <input
+                            id="doacaoQuantidade"
+                            type="number"
+                            min="1"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="doacaoNome">
+                            Nome
+                        </label>
+
+                        <input
+                            id="doacaoNome"
+                            type="text"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button success">
+
+                        Registrar doação
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="page-card">
+
+                <h2>
+                    Doações registradas
+                </h2>
+
+                <div id="listaDoacoes"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- REGISTROS -->
+
+    <div
+        id="pagina-registros"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <h2 class="section-title">
+                Todos os registros
+            </h2>
+
+            <div class="search-area">
+
+                <input
+                    type="search"
+                    id="campoBusca"
+                    placeholder="Pesquisar registros...">
+
+                <div class="filters">
+
+                    <button
+                        type="button"
+                        class="filter-button active"
+                        data-tipo="todos">
+
+                        Todos
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-tipo="problema">
+
+                        Problemas
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-tipo="objeto">
+
+                        Objetos
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-tipo="talento">
+
+                        Talentos
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-tipo="doacao">
+
+                        Doações
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="resultados"></div>
+
+        </div>
+
+    </div>
+
+    <!-- IMPACTO -->
+
+    <div
+        id="pagina-impacto"
+        class="page">
+
+        <div class="internal-page">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="voltar()">
+
+                ← Voltar
+
+            </button>
+
+            <div class="page-card">
+
+                <h2>
+                    Impacto do CEGF Conecta
+                </h2>
+
+                <p>
+                    O projeto foi desenvolvido para melhorar
+                    a comunicação dentro da comunidade escolar.
+                </p>
+
+                <br>
+
+                <p>
+                    Por meio da plataforma, estudantes,
+                    professores e funcionários podem colaborar,
+                    compartilhar informações, encontrar objetos,
+                    divulgar talentos e ajudar outras pessoas.
+                </p>
+
+                <br>
+
+                <h3>
+                    Nossos números
+                </h3>
+
+                <br>
+
+                <p>
+                    Problemas registrados:
+                    <strong id="impactoProblemas">0</strong>
+                </p>
+
+                <p>
+                    Objetos registrados:
+                    <strong id="impactoObjetos">0</strong>
+                </p>
+
+                <p>
+                    Talentos cadastrados:
+                    <strong id="impactoTalentos">0</strong>
+                </p>
+
+                <p>
+                    Doações registradas:
+                    <strong id="impactoDoacoes">0</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <p>
+        CEGF Conecta
+    </p>
+
+    <p>
+        Tecnologia a serviço da comunidade escolar.
+    </p>
+
+</footer>
+
+<script>
+
+    /* ==============================
+       BANCO DE DADOS DO NAVEGADOR
+       ============================== */
+
+    var registros = [];
+
+    var dadosSalvos =
+        localStorage.getItem("cegfConectaRegistros");
+
+    if (dadosSalvos) {
+
+        try {
+
+            registros = JSON.parse(dadosSalvos);
+
+        } catch (erro) {
+
+            registros = [];
+
+        }
+
+    }
+
+    var paginaAtual = "inicio";
+
+    var paginaAnterior = "inicio";
+
+    var filtroAtual = "todos";
+
+
+    /* ==============================
+       SALVAR
+       ============================== */
+
+    function salvarRegistros() {
+
+        localStorage.setItem(
+            "cegfConectaRegistros",
+            JSON.stringify(registros)
+        );
+
+    }
+
+
+    /* ==============================
+       TROCAR DE PÁGINA
+       ============================== */
+
+    function mostrarPagina(nome) {
+
+        paginaAnterior = paginaAtual;
+
+        paginaAtual = nome;
+
+        var paginas =
+            document.querySelectorAll(".page");
+
+        paginas.forEach(function(pagina) {
+
+            pagina.classList.remove("active");
+
+        });
+
+        var pagina =
+            document.getElementById(
+                "pagina-" + nome
+            );
+
+        if (pagina) {
+
+            pagina.classList.add("active");
+
+        }
+
+        window.scrollTo(0, 0);
+
+        document
+            .getElementById("menu")
+            .classList
+            .remove("active");
+
+        atualizarPagina();
+
+    }
+
+
+    /* ==============================
+       BOTÃO VOLTAR
+       ============================== */
+
+    function voltar() {
+
+        mostrarPagina(paginaAnterior);
+
+    }
+
+
+    /* ==============================
+       TIPO DO REGISTRO
+       ============================== */
+
+    function nomeTipo(tipo) {
+
+        if (tipo === "problema") {
+            return "Problema";
+        }
+
+        if (tipo === "objeto") {
+            return "Achados e Perdidos";
+        }
+
+        if (tipo === "talento") {
+            return "Talento";
+        }
+
+        if (tipo === "doacao") {
+            return "Doação";
+        }
+
+        return "Registro";
+
+    }
+
+
+    /* ==============================
+       ESCAPAR TEXTO
+       ============================== */
+
+    function escapar(texto) {
+
+        var div =
+            document.createElement("div");
+
+        div.textContent = texto;
+
+        return div.innerHTML;
+
+    }
+
+
+    /* ==============================
+       ESTATÍSTICAS
+       ============================== */
+
+    function atualizarEstatisticas() {
+
+        var problemas = 0;
+        var objetos = 0;
+        var talentos = 0;
+        var doacoes = 0;
+
+        registros.forEach(function(registro) {
+
+            if (registro.tipo === "problema") {
+                problemas++;
+            }
+
+            if (registro.tipo === "objeto") {
+                objetos++;
+            }
+
+            if (registro.tipo === "talento") {
+                talentos++;
+            }
+
+            if (registro.tipo === "doacao") {
+                doacoes++;
+            }
+
+        });
+
+        document.getElementById(
+            "totalProblemas"
+        ).textContent = problemas;
+
+        document.getElementById(
+            "totalObjetos"
+        ).textContent = objetos;
+
+        document.getElementById(
+            "totalTalentos"
+        ).textContent = talentos;
+
+        document.getElementById(
+            "totalDoacoes"
+        ).textContent = doacoes;
+
+        document.getElementById(
+            "impactoProblemas"
+        ).textContent = problemas;
+
+        document.getElementById(
+            "impactoObjetos"
+        ).textContent = objetos;
+
+        document.getElementById(
+            "impactoTalentos"
+        ).textContent = talentos;
+
+        document.getElementById(
+            "impactoDoacoes"
+        ).textContent = doacoes;
+
+    }
+
+
+    /* ==============================
+       MOSTRAR REGISTROS POR TIPO
+       ============================== */
+
+    function mostrarLista(
+        tipo,
+        elementoId
+    ) {
+
+        var area =
+            document.getElementById(elementoId);
+
+        area.innerHTML = "";
+
+        var encontrados = 0;
+
+        for (
+            var i = registros.length - 1;
+            i >= 0;
+            i--
+        ) {
+
+            var registro = registros[i];
+
+            if (registro.tipo !== tipo) {
+                continue;
+            }
+
+            var item =
+                document.createElement("div");
+
+            item.className = "record";
+
+            item.innerHTML =
+                "<h3>" +
+                escapar(registro.titulo) +
+                "</h3>" +
+
+                "<p><strong>Descrição:</strong> " +
+                escapar(registro.descricao) +
+                "</p>" +
+
+                "<p><strong>Nome:</strong> " +
+                escapar(registro.nome) +
+                "</p>" +
+
+                "<p><strong>Data:</strong> " +
+                escapar(registro.data) +
+                "</p>";
+
+            if (registro.local) {
+
+                item.innerHTML +=
+                    "<p><strong>Local:</strong> " +
+                    escapar(registro.local) +
+                    "</p>";
+
+            }
+
+            if (registro.status) {
+
+                item.innerHTML +=
+                    "<p><strong>Situação:</strong> " +
+                    escapar(registro.status) +
+                    "</p>";
+
+            }
+
+            if (registro.quantidade) {
+
+                item.innerHTML +=
+                    "<p><strong>Quantidade:</strong> " +
+                    escapar(
+                        registro.quantidade
+                    ) +
+                    "</p>";
+
+            }
+
+            area.appendChild(item);
+
+            encontrados++;
+
+        }
+
+        if (encontrados === 0) {
+
+            area.innerHTML =
+                '<div class="empty">' +
+                "Nenhum registro encontrado." +
+                "</div>";
+
+        }
+
+    }
+
+
+    /* ==============================
+       TODOS OS REGISTROS
+       ============================== */
+
+    function mostrarTodos() {
+
+        var area =
+            document.getElementById(
+                "resultados"
+            );
+
+        if (!area) {
+            return;
+        }
+
+        var busca =
+            document.getElementById(
+                "campoBusca"
+            ).value.toLowerCase();
+
+        area.innerHTML = "";
+
+        var encontrados = 0;
+
+        for (
+            var i = registros.length - 1;
+            i >= 0;
+            i--
+        ) {
+
+            var registro = registros[i];
+
+            var texto =
+                (
+                    registro.titulo +
+                    " " +
+                    registro.descricao +
+                    " " +
+                    registro.nome +
+                    " " +
+                    registro.local
+                ).toLowerCase();
+
+            var buscaOK =
+                texto.indexOf(busca) !== -1;
+
+            var tipoOK =
+                filtroAtual === "todos" ||
+                registro.tipo === filtroAtual;
+
+            if (!buscaOK || !tipoOK) {
+                continue;
+            }
+
+            var item =
+                document.createElement("div");
+
+            item.className = "record";
+
+            item.innerHTML =
+                "<h3>" +
+                escapar(registro.titulo) +
+                "</h3>" +
+
+                "<p><strong>Categoria:</strong> " +
+                nomeTipo(registro.tipo) +
+                "</p>" +
+
+                "<p><strong>Descrição:</strong> " +
+                escapar(registro.descricao) +
+                "</p>" +
+
+                "<p><strong>Nome:</strong> " +
+                escapar(registro.nome) +
+                "</p>" +
+
+                "<p><strong>Data:</strong> " +
+                escapar(registro.data) +
+                "</p>";
+
+            if (registro.local) {
+
+                item.innerHTML +=
+                    "<p><strong>Local:</strong> " +
+                    escapar(registro.local) +
+                    "</p>";
+
+            }
+
+            if (registro.status) {
+
+                item.innerHTML +=
+                    "<p><strong>Situação:</strong> " +
+                    escapar(registro.status) +
+                    "</p>";
+
+            }
+
+            if (registro.quantidade) {
+
+                item.innerHTML +=
+                    "<p><strong>Quantidade:</strong> " +
+                    escapar(
+                        registro.quantidade
+                    ) +
+                    "</p>";
+
+            }
+
+            area.appendChild(item);
+
+            encontrados++;
+
+        }
+
+        if (encontrados === 0) {
+
+            area.innerHTML =
+                '<div class="empty">' +
+                "Nenhum registro encontrado." +
+                "</div>";
+
+        }
+
+    }
+
+
+    /* ==============================
+       FORMULÁRIO DE PROBLEMA
+       ============================== */
+
+    document
+        .getElementById("formProblema")
+        .addEventListener(
+            "submit",
+            function(evento) {
+
+                evento.preventDefault();
+
+                var registro = {
+
+                    tipo: "problema",
+
+                    titulo:
+                        document
+                        .getElementById(
+                            "problemaTitulo"
+                        )
+                        .value,
+
+                    descricao:
+                        document
+                        .getElementById(
+                            "problemaDescricao"
+                        )
+                        .value,
+
+                    local:
+                        document
+                        .getElementById(
+                            "problemaLocal"
+                        )
+                        .value,
+
+                    nome:
+                        document
+                        .getElementById(
+                            "problemaNome"
+                        )
+                        .value,
+
+                    status: "",
+
+                    quantidade: "",
+
+                    data:
+                        new Date()
+                        .toLocaleDateString(
+                            "pt-BR"
+                        )
+
+                };
+
+                registros.push(registro);
+
+                salvarRegistros();
+
+                document
+                    .getElementById(
+                        "formProblema"
+                    )
+                    .reset();
+
+                alert(
+                    "Problema registrado com sucesso!"
+                );
+
+                atualizarPagina();
+
+            }
+        );
+
+
+    /* ==============================
+       FORMULÁRIO DE OBJETO
+       ============================== */
+
+    document
+        .getElementById("formObjeto")
+        .addEventListener(
+            "submit",
+            function(evento) {
+
+                evento.preventDefault();
+
+                var registro = {
+
+                    tipo: "objeto",
+
+                    titulo:
+                        document
+                        .getElementById(
+                            "objetoTitulo"
+                        )
+                        .value,
+
+                    descricao:
+                        document
+                        .getElementById(
+                            "objetoDescricao"
+                        )
+                        .value,
+
+                    local:
+                        document
+                        .getElementById(
+                            "objetoLocal"
+                        )
+                        .value,
+
+                    status:
+                        document
+                        .getElementById(
+                            "objetoSituacao"
+                        )
+                        .value,
+
+                    nome:
+                        document
+                        .getElementById(
+                            "objetoNome"
+                        )
+                        .value,
+
+                    quantidade: "",
+
+                    data:
+                        new Date()
+                        .toLocaleDateString(
+                            "pt-BR"
+                        )
+
+                };
+
+                registros.push(registro);
+
+                salvarRegistros();
+
+                document
+                    .getElementById(
+                        "formObjeto"
+                    )
+                    .reset();
+
+                alert(
+                    "Objeto registrado com sucesso!"
+                );
+
+                atualizarPagina();
+
+            }
+        );
+
+
+    /* ==============================
+       FORMULÁRIO DE TALENTO
+       ============================== */
+
+    document
+        .getElementById("formTalento")
+        .addEventListener(
+            "submit",
+            function(evento) {
+
+                evento.preventDefault();
+
+                var registro = {
+
+                    tipo: "talento",
+
+                    titulo:
+                        document
+                        .getElementById(
+                            "talentoTitulo"
+                        )
+                        .value,
+
+                    descricao:
+                        document
+                        .getElementById(
+                            "talentoDescricao"
+                        )
+                        .value,
+
+                    nome:
+                        document
+                        .getElementById(
+                            "talentoNome"
+                        )
+                        .value,
+
+                    local: "",
+
+                    status: "",
+
+                    quantidade: "",
+
+                    data:
+                        new Date()
+                        .toLocaleDateString(
+                            "pt-BR"
+                        )
+
+                };
+
+                registros.push(registro);
+
+                salvarRegistros();
+
+                document
+                    .getElementById(
+                        "formTalento"
+                    )
+                    .reset();
+
+                alert(
+                    "Talento cadastrado com sucesso!"
+                );
+
+                atualizarPagina();
+
+            }
+        );
+
+
+    /* ==============================
+       FORMULÁRIO DE DOAÇÃO
+       ============================== */
+
+    document
+        .getElementById("formDoacao")
+        .addEventListener(
+            "submit",
+            function(evento) {
+
+                evento.preventDefault();
+
+                var registro = {
+
+                    tipo: "doacao",
+
+                    titulo:
+                        document
+                        .getElementById(
+                            "doacaoTitulo"
+                        )
+                        .value,
+
+                    descricao:
+                        document
+                        .getElementById(
+                            "doacaoDescricao"
+                        )
+                        .value,
+
+                    nome:
+                        document
+                        .getElementById(
+                            "doacaoNome"
+                        )
+                        .value,
+
+                    quantidade:
+                        document
+                        .getElementById(
+                            "doacaoQuantidade"
+                        )
+                        .value,
+
+                    local: "",
+
+                    status: "",
+
+                    data:
+                        new Date()
+                        .toLocaleDateString(
+                            "pt-BR"
+                        )
+
+                };
+
+                registros.push(registro);
+
+                salvarRegistros();
+
+                document
+                    .getElementById(
+                        "formDoacao"
+                    )
+                    .reset();
+
+                alert(
+                    "Doação registrada com sucesso!"
+                );
+
+                atualizarPagina();
+
+            }
+        );
+
+
+    /* ==============================
+       FILTROS
+       ============================== */
+
+    var botoesFiltro =
+        document.querySelectorAll(
+            ".filter-button"
+        );
+
+    botoesFiltro.forEach(
+        function(botao) {
+
+            botao.addEventListener(
+                "click",
+                function() {
+
+                    botoesFiltro.forEach(
+                        function(outro) {
+
+                            outro
+                                .classList
+                                .remove(
+                                    "active"
+                                );
+
+                        }
+                    );
+
+                    botao
+                        .classList
+                        .add("active");
+
+                    filtroAtual =
+                        botao.getAttribute(
+                            "data-tipo"
+                        );
+
+                    mostrarTodos();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==============================
+       PESQUISA
+       ============================== */
+
+    document
+        .getElementById("campoBusca")
+        .addEventListener(
+            "input",
+            mostrarTodos
+        );
+
+
+    /* ==============================
+       MENU MOBILE
+       ============================== */
+
+    document
+        .getElementById("menuButton")
+        .addEventListener(
+            "click",
+            function() {
+
+                document
+                    .getElementById("menu")
+                    .classList
+                    .toggle("active");
+
+            }
+        );
+
+
+    /* ==============================
+       ATUALIZAR TUDO
+       ============================== */
+
+    function atualizarPagina() {
+
+        atualizarEstatisticas();
+
+        mostrarLista(
+            "problema",
+            "listaProblemas"
+        );
+
+        mostrarLista(
+            "objeto",
+            "listaObjetos"
+        );
+
+        mostrarLista(
+            "talento",
+            "listaTalentos"
+        );
+
+        mostrarLista(
+            "doacao",
+            "listaDoacoes"
+        );
+
+        mostrarTodos();
+
+    }
+
+
+    atualizarPagina();
+
+</script>
+
+</body>
+</html>
+```
